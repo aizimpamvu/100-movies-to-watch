@@ -15,8 +15,10 @@ soup = BeautifulSoup(mv_web_page, "html.parser")
 movies_list = []
 all_movies = soup.find_all(name="h3", class_="title")
 
-for movie in all_movies:
-    # print(movie.getText())
-    with open("movies.txt", "w", encoding="utf8") as file:
-        file.write(movie.getText())
+movie_titles = [movie.getText() for movie in all_movies]
+
+movies = movies_list[::-1]
+with open("movies.txt", mode="w", encoding="utf8") as file:
+    for movie in movies:
+        file.write(f"{movie}\n")
 
